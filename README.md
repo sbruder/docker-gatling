@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/sbruder/docker-gatling.svg)](https://microbadger.com/images/sbruder/docker-gatling "Get your own image badge on microbadger.com")
+
 # docker-gatling
 
 Dockerized [gatling](https://www.fefe.de/gatling/) (high performance HTTP(S),
