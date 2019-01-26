@@ -1,4 +1,4 @@
-[![](https://images.microbadger.com/badges/image/sbruder/docker-gatling.svg)](https://microbadger.com/images/sbruder/docker-gatling "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/sbruder/gatling.svg)](https://microbadger.com/images/sbruder/gatling "Get your own image badge on microbadger.com")
 
 # docker-gatling
 
