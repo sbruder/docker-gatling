@@ -29,7 +29,7 @@ COPY --from=builder /gatling/gatling /gatling
 COPY --from=builder /gatling/ptlsgatling /ptlsgatling
 COPY --from=builder /gatling/dl /dl
 
-WORKDIR /var/www
+WORKDIR /srv/www
 
 ENTRYPOINT ["/ptlsgatling"]
 
