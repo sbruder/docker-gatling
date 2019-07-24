@@ -19,15 +19,17 @@ RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co libowfat \
 RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co gatling \
     && cd gatling \
     && make -j 4 \
+        bench \
+        dl \
         gatling \
         ptlsgatling \
-        dl \
         LDFLAGS="-s -L../libowfat/ -lowfat -L/usr/lib/ -lmbedtls -lmbedx509 -lmbedcrypto -static"
 
 FROM scratch
+COPY --from=builder /gatling/bench /bench
+COPY --from=builder /gatling/dl /dl
 COPY --from=builder /gatling/gatling /gatling
 COPY --from=builder /gatling/ptlsgatling /ptlsgatling
-COPY --from=builder /gatling/dl /dl
 
 WORKDIR /srv/www
 
