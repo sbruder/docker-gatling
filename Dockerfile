@@ -1,4 +1,5 @@
 FROM alpine as builder
+
 RUN apk add --no-cache \
     build-base \
     cvs \
@@ -25,14 +26,15 @@ RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co gatling \
         ptlsgatling \
         LDFLAGS="-s -L../libowfat/ -lowfat -L/usr/lib/ -lmbedtls -lmbedx509 -lmbedcrypto -static"
 
-FROM scratch
-COPY --from=builder /gatling/bench /bench
-COPY --from=builder /gatling/dl /dl
-COPY --from=builder /gatling/gatling /gatling
-COPY --from=builder /gatling/ptlsgatling /ptlsgatling
+FROM alpine
+
+COPY --from=builder /gatling/bench /usr/local/bin/bench
+COPY --from=builder /gatling/dl /usr/local/bin/dl
+COPY --from=builder /gatling/gatling /usr/local/bin/gatling
+COPY --from=builder /gatling/ptlsgatling /usr/local/bin/ptlsgatling
 
 WORKDIR /srv/www
 
-ENTRYPOINT ["/ptlsgatling"]
+ENTRYPOINT ["ptlsgatling"]
 
 EXPOSE 21 80 443 445
