@@ -28,6 +28,8 @@ RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co gatling \
 
 FROM alpine
 
+RUN apk add --no-cache tini
+
 COPY --from=builder /gatling/bench /usr/local/bin/bench
 COPY --from=builder /gatling/dl /usr/local/bin/dl
 COPY --from=builder /gatling/gatling /usr/local/bin/gatling
@@ -35,6 +37,6 @@ COPY --from=builder /gatling/ptlsgatling /usr/local/bin/ptlsgatling
 
 WORKDIR /srv/www
 
-ENTRYPOINT ["ptlsgatling"]
+ENTRYPOINT ["tini", "--", "ptlsgatling"]
 
 EXPOSE 21 80 443 445
