@@ -5,19 +5,14 @@ RUN apk add --no-cache \
     cvs \
     git \
     libcap-dev \
+    libowfat-dev \
     libressl-dev \
-    zlib-dev
+    mbedtls-dev \
+    mbedtls-static \
+    zlib-dev \
+    zlib-static
 
-RUN git clone --depth=1 --recursive https://github.com/ARMmbed/mbedtls mbedtls \
-    && cd mbedtls \
-    && make -j 4 install
-
-RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co libowfat \
-    && cd libowfat \
-    && make -j 4 dep \
-    && make -j 4 install
-
-RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co gatling \
+RUN cvs -d :pserver:cvs@cvs.fefe.de:/cvs co gatling \
     && cd gatling \
     && make -j 4 \
         bench \
